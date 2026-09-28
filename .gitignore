@@ -1,0 +1,17 @@
+# VM images and disks
+*.iso
+*.ova
+*.ovf
+*.vmdk
+*.vdi
+*.qcow2
+*.7z
+
+# Raw pfSense backups (contain password hashes)
+config-*.xml
+!configs/pfsense/config-sanitized.xml
+
+# Secrets
+*.key
+*.pem
+.env

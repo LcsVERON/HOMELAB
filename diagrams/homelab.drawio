@@ -1,0 +1,66 @@
+<mxfile host="65bd71144e">
+    <diagram id="homelab-v1" name="Homelab">
+        <mxGraphModel dx="2002" dy="1142" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="title" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=18;fontStyle=1;" value="Cybersecurity homelab: network architecture&amp;nbsp;" vertex="1">
+                    <mxGeometry height="30" width="600" x="40" y="10" as="geometry"/>
+                </mxCell>
+                <mxCell id="internet" parent="1" style="ellipse;shape=cloud;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontStyle=1;" value="Internet" vertex="1">
+                    <mxGeometry height="90" width="160" x="500" y="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="host" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fafafa;strokeColor=#666666;dashed=1;verticalAlign=top;align=left;spacingLeft=10;spacingTop=4;fontStyle=1;fontSize=13;" value="Host machine: VirtualBox" vertex="1">
+                    <mxGeometry height="600" width="1080" x="40" y="160" as="geometry"/>
+                </mxCell>
+                <mxCell id="wan" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e6e6e6;strokeColor=#666666;" value="&lt;b&gt;WAN&lt;/b&gt;&lt;br&gt;DHCP client&lt;br&gt;(VirtualBox NAT / home router)" vertex="1">
+                    <mxGeometry height="60" width="180" x="490" y="190" as="geometry"/>
+                </mxCell>
+                <mxCell id="pfsense" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=12;" value="&lt;b&gt;pfSense CE&lt;/b&gt;&lt;br&gt;fw.lab.home.arpa&lt;br&gt;firewall · router · NAT · DHCP · DNS" vertex="1">
+                    <mxGeometry height="80" width="220" x="470" y="300" as="geometry"/>
+                </mxCell>
+                <mxCell id="zone-attack" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;verticalAlign=top;fontStyle=1;spacingTop=4;" value="LAN_ATTACK · 10.10.10.0/24 · VLAN 10&lt;br&gt;&lt;span style=&quot;font-weight:normal&quot;&gt;VirtualBox: intnet-attack · Internet: yes&lt;/span&gt;" vertex="1">
+                    <mxGeometry height="260" width="420" x="80" y="460" as="geometry"/>
+                </mxCell>
+                <mxCell id="kali" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#b85450;" value="&lt;b&gt;Kali Linux&lt;/b&gt;&lt;br&gt;kali.lab.home.arpa&lt;br&gt;10.10.10.10 (DHCP static mapping)&lt;br&gt;attacker workstation" vertex="1">
+                    <mxGeometry height="90" width="220" x="180" y="560" as="geometry"/>
+                </mxCell>
+                <mxCell id="zone-targets" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;verticalAlign=top;fontStyle=1;spacingTop=4;" value="LAN_TARGETS · 10.10.20.0/24 · VLAN 20&lt;br&gt;&lt;span style=&quot;font-weight:normal&quot;&gt;VirtualBox: intnet-targets · Internet: Debian updates only, Metasploitable never&lt;/span&gt;" vertex="1">
+                    <mxGeometry height="260" width="490" x="600" y="460" as="geometry"/>
+                </mxCell>
+                <mxCell id="debian" parent="1" style="rounded=1;whiteSpace:wrap;html=1;fillColor=#ffffff;strokeColor=#6c8ebf;" value="&lt;b&gt;Debian 13&lt;/b&gt;&lt;br&gt;srv01.lab.home.arpa&lt;br&gt;10.10.20.10 (static)&lt;br&gt;SSH · nginx · DVWA (Docker, :4280)" vertex="1">
+                    <mxGeometry height="90" width="210" x="630" y="560" as="geometry"/>
+                </mxCell>
+                <mxCell id="msf2" parent="1" style="rounded=1;whiteSpace:wrap;html=1;fillColor=#ffffff;strokeColor=#6c8ebf;" value="&lt;b&gt;Metasploitable 2&lt;/b&gt;&lt;br&gt;msf2.lab.home.arpa&lt;br&gt;10.10.20.20 (static)&lt;br&gt;intentionally vulnerable" vertex="1">
+                    <mxGeometry height="90" width="210" x="860" y="560" as="geometry"/>
+                </mxCell>
+                <mxCell id="e-internet-wan" edge="1" parent="1" source="internet" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=none;strokeColor=#666666;strokeWidth=2;" target="wan">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e-wan-pfsense" edge="1" parent="1" source="wan" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=none;strokeColor=#666666;strokeWidth=2;fontSize=11;" target="pfsense" value="em0 / vtnet0">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e-pfsense-attack" edge="1" parent="1" source="pfsense" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=none;strokeColor=#b85450;strokeWidth=2;fontSize=11;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="zone-attack" value="LAN (ATTACK)&lt;br&gt;10.10.10.1/24&lt;br&gt;em1 / vtnet1.10">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="525" y="420"/>
+                            <mxPoint x="290" y="420"/>
+                        </Array>
+                        <mxPoint x="440" y="420" as="sourcePoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="e-pfsense-targets" edge="1" parent="1" source="pfsense" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=none;strokeColor=#6c8ebf;strokeWidth=2;fontSize=11;exitX=0.75;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="zone-targets" value="OPT1 (TARGETS)&lt;br&gt;10.10.20.1/24&lt;br&gt;em2 / vtnet1.20">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="635" y="420"/>
+                            <mxPoint x="845" y="420"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="note" parent="1" style="text;html=1;strokeColor=#666666;fillColor=#fff2cc;align=left;verticalAlign=middle;whiteSpace:wrap;rounded=0;spacing=6;fontSize=11;" value="&lt;b&gt;Principle&lt;/b&gt;: pfSense is the only path between zones. Traffic inside a zone&lt;div&gt;&amp;nbsp;(Debian ↔ Metasploitable) is not filtered.&lt;br&gt;&lt;b&gt;Rule&lt;/b&gt;: vulnerable machines are never reachable from the home network&amp;nbsp;&lt;/div&gt;&lt;div&gt;or the Internet.&lt;/div&gt;" vertex="1">
+                    <mxGeometry height="140" width="360" x="80" y="190" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>

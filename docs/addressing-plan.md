@@ -61,7 +61,29 @@ machines can be inserted without renumbering.
 
 ## 5. DHCP and DNS on pfSense
 
-> Completed in step 4, once pfSense is installed.
+### DHCP server (ATTACK interface)
+
+| Setting | Value |
+|---------|-------|
+| Range | 10.10.10.100 to 10.10.10.199 |
+| Gateway / DNS pushed to clients | 10.10.10.1 |
+| Domain | lab.home.arpa |
+
+**Static mappings**
+
+| Hostname | MAC address | IP address |
+|----------|-------------|------------|
+| kali | `08:00:27:5a:87:bc` | 10.10.10.10 |
+
+### DNS resolver (Unbound), host overrides
+
+| Host | Domain | IP address |
+|------|--------|------------|
+| srv01 | lab.home.arpa | 10.10.20.10 |
+| msf2 | lab.home.arpa | 10.10.20.20 |
+| kali | lab.home.arpa | 10.10.10.10 (registered automatically through the DHCP static mapping) |
+
+`fw.lab.home.arpa` resolves to the pfSense interface address of the zone the query comes from (10.10.10.1 from ATTACK, 10.10.20.1 from TARGETS).
 
 ### DHCP server (ATTACK interface)
 

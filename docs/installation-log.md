@@ -57,3 +57,42 @@ Rules for this file:
 - `screenshots/network-kali.png`
 - `screenshots/network-debian.png`
 - `screenshots/network-msf2.png`
+
+## Step 4: pfSense installation and configuration (2026-10-08)
+
+**Done:**
+- Booted pfSense VM from the installer ISO
+- Accepted license, selected Install CE, chose ZFS for partitioning, rebooted
+- Removed the ISO from the CD drive before the second boot
+- Assigned interfaces via MAC address:
+  - em0 (NAT) → WAN
+  - em1 (intnet-attack) → LAN (ATTACK)
+  - em2 (intnet-targets) → OPT1 (TARGETS)
+- Configured interfaces in console menu (option 2):
+  - LAN: 10.10.10.1/24, DHCP enabled (10.10.10.100 to 10.10.10.199)
+  - OPT1: 10.10.20.1/24 (static, no DHCP)
+- Accessed webConfigurator from Kali (https://10.10.10.1)
+- Completed setup wizard:
+  - Hostname: fw, Domain: lab.home.arpa
+  - Timezone: Europe/Paris
+  - WAN: DHCP
+  - DNS: left empty (uses Unbound resolver)
+- Configured DHCP static mapping:
+  - Kali MAC address → 10.10.10.10, hostname: kali
+- Configured DNS host overrides:
+  - srv01.lab.home.arpa → 10.10.20.10
+  - msf2.lab.home.arpa → 10.10.20.20
+- Enabled "Block RFC1918 Private Networks" and "Block bogon networks" on WAN
+- Verified DHCP leases show Kali correctly assigned to 10.10.10.10
+
+**Problems and solutions:**
+- Installation failed on first attempt: package fetch error from pkg.pfsense.org, retried installation, succeeded on second try
+- After installation, pfSense booted into installer again instead of the system, ISO was still connected to the CD drive, Removed ISO from VirtualBox VM settings before rebooting, pfSense booted from disk correctly
+- Initially configured LAN via DHCP in console menu, corrected to static IP 10.10.10.1/24 with DHCP server enabled
+
+**Screenshots:**
+- screenshots/pfsense-dashboard.png
+- screenshots/pfsense-dhcp-leases.png
+- screenshots/pfsense-interfaces.png
+
+**Next:** Install Debian and Kali (steps 5-6).

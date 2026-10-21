@@ -53,10 +53,10 @@ Rules for this file:
 - It was a bit difficult to use Virtual Box as I was not used to it, so I looked for help on the Internet and I was assisted by AI.
 
 **Screenshots:**
-- `screenshots/network-pfsense.png`
-- `screenshots/network-kali.png`
-- `screenshots/network-debian.png`
-- `screenshots/network-msf2.png`
+- `screenshots/step3/network-pfsense.png`
+- `screenshots/step3/network-kali.png`
+- `screenshots/step3/network-debian.png`
+- `screenshots/step3/network-msf2.png`
 
 ## Step 4: pfSense installation and configuration (2026-10-08)
 
@@ -91,8 +91,21 @@ Rules for this file:
 - Initially configured LAN via DHCP in console menu, corrected to static IP 10.10.10.1/24 with DHCP server enabled
 
 **Screenshots:**
-- screenshots/pfsense-dashboard.png
-- screenshots/pfsense-dhcp-leases.png
-- screenshots/pfsense-interfaces.png
+- `screenshots/step4/pfsense-dashboard.png`
+- `screenshots/step4/pfsense-dhcp-leases.png`
+- `screenshots/step4/pfsense-interfaces.png`
 
-**Next:** Install Debian and Kali (steps 5-6).
+**Next:** Configure Debian and Kali (steps 5-6).
+
+## Step 5 & 6: Configuration of Debian and Kali (2026-10-08)
+
+**Done:**
+- Changed Kali's password
+- Verified ip address
+- Looked for updates
+- Cloned the git repository with SSH
+- Network config on Debian
+- SSH hardening (administration from Kali)
+
+**Screenshots:**
+- `screenshots/step5/kali-ip.png`

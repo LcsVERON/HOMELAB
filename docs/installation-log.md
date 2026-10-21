@@ -97,7 +97,7 @@ Rules for this file:
 
 **Next:** Configure Debian and Kali (steps 5-6).
 
-## Step 5 & 6: Configuration of Debian and Kali (2026-10-08)
+## Step 5 & 6: Configuration of Debian and Kali (2026-10-08 / 2026-10-21)
 
 **Done:**
 - Changed Kali's password
@@ -106,6 +106,10 @@ Rules for this file:
 - Cloned the git repository with SSH
 - Network config on Debian
 - SSH hardening (administration from Kali)
+- Installed nginx and Docker on Debian from Kali VM
+- Changed ports line in compose.yml in order to expose port 80 to the lab network from Kali VM
+- Created / Reset Database from Kali VM
 
 **Screenshots:**
 - `screenshots/step5/kali-ip.png`
+- `screenshots/step6/dvwa-login.png`

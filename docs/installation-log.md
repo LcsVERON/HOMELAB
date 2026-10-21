@@ -113,3 +113,14 @@ Rules for this file:
 **Screenshots:**
 - `screenshots/step5/kali-ip.png`
 - `screenshots/step6/dvwa-login.png`
+
+**Next:** Configure Metasploitable (step 7).
+
+## Step 7: Configuration of Metasploitable (2026-10-21)
+
+**Done:**
+- Configuration of a fixed IP address : modification of /etc/network/interfaces
+- Snapshot of the current state of Metasploitable : we will go back to this state after every attack
+
+**Screenshots:**
+- `screenshots/step7/msf-ifconfig.png`

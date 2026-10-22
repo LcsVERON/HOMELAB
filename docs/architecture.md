@@ -34,7 +34,19 @@ home network or from the Internet. pfSense is the only path between zones.
 - lab.home.arpa domain (RFC 8375)
 
 ## Known limitations
-<to be completed in step 8>
+
+- **Debian ↔ Metasploitable traffic is not filtered.** Both are in CIBLES, on
+  the same subnet, so their traffic never crosses pfSense. If Metasploitable is
+  compromised, it can reach Debian directly. Fix planned in future work: a
+  separate VLAN for vulnerable machines, so pfSense filters that traffic too.
+- **Kali can administer pfSense**, via the anti-lockout rule and via 10.10.20.1
+  through R1. In a real network, administration would come from a dedicated
+  management VLAN, and the anti-lockout rule would be removed from the attacker
+  zone.
+- **R6 overlaps with R7.** R7 already blocks everything, including the firewall.
+  R6 is kept on purpose: it gives a dedicated log line for attempts against the
+  firewall, and it protects against a permissive rule being added later between
+  the two.
 
 ## Future work
 <to be completed in step 10>

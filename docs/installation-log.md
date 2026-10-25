@@ -169,10 +169,42 @@ Rules for this file:
   `timedatectl timesync-status` (Server = 10.10.20.1).
 
 **Screenshots:**
-- screenshots/08-aliases.png
-- screenshots/08-rules-attaque.png
-- screenshots/08-rules-cibles.png
-- screenshots/08-rules-wan.png
+- `screenshots/step8/aliases.png`
+- `screenshots/step8/rules-attaque.png`
+- `screenshots/step8/rules-cibles.png`
+- `screenshots/step8/rules-wan.png`
 
 **Next:** test and prove the segmentation (step 9).
+
+## Step 9: Segmentation tests (2026-10-25)
+
+**Done:**
+- Wrote the test matrix and expected results in docs/tests.md (11 tests)
+- Wrote a first version of [check-lab.sh](../tests/check-lab.sh) with tests from kali then extended it to also drive the Debian-side checks from Kali over
+  SSH, so T6, T7 and T8 run in the same pass as the Kali-side checks (14 checks
+  total). Used `bash /dev/tcp` on Debian instead of nc, which is not guaranteed
+  to be installed
+- Ran the script from Kali: 14 passed, 0 failed
+- Ran the manual tests that cannot be scripted from one machine: nmap -sV (T2),
+  Metasploitable with no Internet (T9), reverse shell allowed on 4444 (T10) and
+  blocked on 5555 (T11)
+- Captured firewall log evidence for the blocked tests (T5, T9, T11) and the
+  terminal for the allowed reverse shell (T10):
+  - `screenshots/step9/t9-msf-no-internet.png`
+  - `screenshots/step9/t11-reverse-blocked.png`
+  - `screenshots/step9/t5-home-blocked.png`
+  - `screenshots/step9/t10reverse-shell.png`
+- Confirmed every blocked flow produces a matching "Default denied" / "Explicit
+  default denied" log entry on the right interface.
+
+**Problems and solutions:**
+- The home-network test (T5) was first run against the real home router address,
+  which would have ended up on a public repository → re-ran it against a
+  representative private address (192.168.1.1). Rule R4 blocks the whole RFC1918
+  range, so the proof is identical, and no real address is published, even if it was not a big risk in this case.
+
+**Screenshots:** see the four files listed above.
+
+**Next:** optional 802.1Q VLAN improvements (step 10), then final documentation
+and publishing (step 11).
 

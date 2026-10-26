@@ -53,7 +53,9 @@ Rules for this file:
 - It was a bit difficult to use Virtual Box as I was not used to it → looked for help on the Internet and I was assisted by AI.
 
 **Screenshots:**
-- `screenshots/step3/network-pfsense.png`
+- `screenshots/step3/network-pfsense-1.png`
+- `screenshots/step3/network-pfsense-2.png`
+- `screenshots/step3/network-pfsense-3.png`
 - `screenshots/step3/network-kali.png`
 - `screenshots/step3/network-debian.png`
 - `screenshots/step3/network-msf2.png`
@@ -93,7 +95,7 @@ Rules for this file:
 **Screenshots:**
 - `screenshots/step4/pfsense-dashboard.png`
 - `screenshots/step4/pfsense-dhcp-leases.png`
-- `screenshots/step4/pfsense-interfaces.png`
+- `screenshots/step4/pfsense-assignments.png`
 
 **Next:** Configure Debian and Kali (steps 5-6).
 
@@ -193,7 +195,7 @@ Rules for this file:
   - `screenshots/step9/t9-msf-no-internet.png`
   - `screenshots/step9/t11-reverse-blocked.png`
   - `screenshots/step9/t5-home-blocked.png`
-  - `screenshots/step9/t10reverse-shell.png`
+  - `screenshots/step9/t10-reverse-shell.png`
 - Confirmed every blocked flow produces a matching "Default denied" / "Explicit
   default denied" log entry on the right interface.
 

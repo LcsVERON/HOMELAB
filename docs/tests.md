@@ -1,7 +1,7 @@
 # Segmentation tests
 
 This document proves that the firewall policy in
-[03-firewall-rules.md](03-firewall-rules.md) actually works: allowed flows pass,
+[firewall-rules.md](firewall-rules.md) actually works: allowed flows pass,
 forbidden flows are blocked, and the firewall is what blocks them.
 
 All 11 tests gave the expected result, and the automated script reported 0
@@ -47,7 +47,7 @@ Notes:
 
 ## 3. Automated test script
 
-Run from Kali: [../scripts/check-lab.sh](../scripts/check-lab.sh). It checks all
+Run from Kali: [../tests/check-lab.sh](../tests/check-lab.sh). It checks all
 the Kali-side and Debian-side flows in one pass.
 
 ```bash

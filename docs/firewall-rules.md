@@ -2,8 +2,10 @@
 
 This document describes and justifies every pfSense firewall rule in the lab.
 
-Interface names in pfSense: **ATTAQUE** is the LAN side (10.10.10.0/24, the
-attacker zone), **CIBLES** is the OPT1 side (10.10.20.0/24, the targets zone).
+Interface names in pfSense: **ATTAQUE** (French for "attack") is the LAN side
+(10.10.10.0/24, the attacker zone), **CIBLES** (French for "targets") is the OPT1
+side (10.10.20.0/24, the targets zone). These two were named early in French;
+the later zones (VULN, MGMT) and all documentation are in English.
 
 ## 1. How pfSense filtering works
 

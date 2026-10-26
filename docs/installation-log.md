@@ -209,7 +209,7 @@ Rules for this file:
 
 **Next:** optional 802.1Q VLAN improvements (step 10).
 
-## Step 10: 802.1Q VLANs, target isolation and management plane
+## Step 10: 802.1Q VLANs, target isolation and management plane (2026-10-26)
 
 **Done:**
 - Added a VLAN trunk: new VirtualBox internal network `intnet-trunk`, attached to
@@ -251,4 +251,30 @@ Rules for this file:
 - `screenshots/step10/msf-to-debian-blocked.png`
 
 **Next:** final documentation and publishing (step 11).
+
+## Step 11: Final documentation and publishing (2026-10-26)
+
+**Done:**
+- Wrote the final README: intro, architecture with the five-zone machine table,
+  security policy summary, skills, challenges, future work, use of AI and
+  disclaimer.
+- Exported the network diagram to PNG (diagrams/improved-homelab.png) and
+  referenced it from the README.
+- Exported the pfSense configuration and sanitized it before committing:
+  replaced the admin password hash and the certificate private key with
+  REDACTED, checked that nothing sensitive remained, and saved it as
+  configs/pfsense/config-sanitized.xml (the raw config-*.xml stays gitignored).
+- Reviewed every doc for broken links and consistency: fixed internal links in
+  tests.md, corrected screenshot file names, and removed leftover placeholders.
+- Set the repository description and topics (pfsense, cybersecurity, networking,
+  vlan, kali-linux) on GitHub and pinned the repository on my profile.
+
+**Problems and solutions:**
+- The pfSense DNS host override for msf2 still pointed to its old address
+  (10.10.20.20) after Metasploitable moved to VULN in step 10 → updated it to
+  10.10.30.20 in the DNS Resolver and re-exported the configuration, so the
+  published config is consistent with the aliases and interfaces.
+
+**Next:** project complete. Possible follow-ups are listed under "Future work"
+in the README (dedicated admin host, log centralization, Suricata IDS).
 

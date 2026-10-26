@@ -15,7 +15,7 @@
     cannot reach, which keeps the vulnerable machines contained
   - Enough resources on this laptop to run all four VMs at once
   - Limitation: no real 802.1Q VLAN tagging (each segment is a separate internal network);
-    moving to Proxmox VE on dedicated hardware is a possible next step
+    moving to Proxmox VE on dedicated hardware is a possible next step (resolved in step 10, see below)
 
 ## Security zones
 
@@ -33,7 +33,7 @@ home network or from the Internet. pfSense is the only path between zones.
 - Addressing 10.10.X.0/24, X = VLAN number
 - lab.home.arpa domain (RFC 8375)
 
-## Known limitations
+## Known limitations (resolved in step 10, see below)
 
 - **Debian ↔ Metasploitable traffic is not filtered.** Both are in CIBLES, on
   the same subnet, so their traffic never crosses pfSense. If Metasploitable is

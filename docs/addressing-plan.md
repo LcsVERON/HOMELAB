@@ -85,24 +85,21 @@ machines can be inserted without renumbering.
 
 `fw.lab.home.arpa` resolves to the pfSense interface address of the zone the query comes from (10.10.10.1 from ATTACK, 10.10.20.1 from TARGETS).
 
-### DHCP server (ATTACK interface)
+## Addressing added in step 10
 
-| Setting | Value |
-|---------|-------|
-| Range | 10.10.10.100 to 10.10.10.199 |
-| Gateway / DNS pushed to clients | 10.10.10.1 |
-| Domain | lab.home.arpa |
+Two zones were added on the em3 trunk.
 
-**Static mappings**
+| Network | VLAN | Subnet | Gateway | Purpose |
+|---------|------|--------|---------|---------|
+| VULN | native on trunk | 10.10.30.0/24 | 10.10.30.1 | Vulnerable targets |
+| MGMT | 99 (tagged) | 10.10.99.0/24 | 10.10.99.1 | Firewall administration |
 
-| Hostname | MAC address | IP address |
-|----------|-------------|------------|
-| kali | `<Kali MAC address>` | 10.10.10.10 |
+| Machine | Interface | IP address | Zone | Note |
+|---------|-----------|------------|------|------|
+| Metasploitable 2 | eth0 | 10.10.30.20 | VULN | moved here from CIBLES (was 10.10.20.20) |
+| Kali (management) | eth1.99 | 10.10.99.10 | MGMT | tagged VLAN 99 sub-interface |
+| pfSense (VULN side) | em3 native | 10.10.30.1 | VULN | - |
+| pfSense (MGMT side) | em3.99 | 10.10.99.1 | MGMT | - |
 
-### DNS resolver (Unbound), host overrides
-
-| Host | Domain | IP address |
-|------|--------|------------|
-| srv01 | lab.home.arpa | 10.10.20.10 |
-| msf2 | lab.home.arpa | 10.10.20.20 |
-| kali | lab.home.arpa | 10.10.10.10 |
+The third octet still matches the VLAN number where one exists (10.10.**99**.x for VLAN **99**). VULN keeps 10.10.**30**.x by convention even though it rides the
+native VLAN. The alias `MSF2` was updated from 10.10.20.20 to 10.10.30.20.

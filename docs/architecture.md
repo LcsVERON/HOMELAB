@@ -48,5 +48,35 @@ home network or from the Internet. pfSense is the only path between zones.
   firewall, and it protects against a permissive rule being added later between
   the two.
 
-## Future work
-<to be completed in step 10>
+## Improvements implemented (step 10)
+
+Two new security zones were added, carried by an 802.1Q trunk on a 4th pfSense
+interface (em3):
+
+| Zone | Subnet | VLAN | Role |
+|------|--------|------|------|
+| VULN | 10.10.30.0/24 | native on the trunk | Vulnerable targets (Metasploitable) |
+| MGMT | 10.10.99.0/24 | tagged VLAN 99 | Firewall administration only |
+
+**1. Metasploitable isolated (closed limitation).** Metasploitable moved from
+CIBLES to VULN. Debian and Metasploitable are now in different subnets, so their
+traffic crosses pfSense and is filtered. The limitation "Debian and
+Metasploitable traffic is not filtered", listed above, is now closed. A compromised Metasploitable can no longer reach Debian directly.
+
+**2. Real 802.1Q VLAN.** MGMT is a tagged VLAN (99) on the em3 trunk; Kali tags
+it on a dedicated sub-interface. VULN uses the native (untagged) VLAN of the same
+trunk, because Metasploitable is too old to tag its own frames. This is a
+realistic trunk carrying a native VLAN plus a tagged VLAN.
+
+**3. Management plane separated.** pfSense is now administered only from MGMT
+(10.10.99.1). The anti-lockout rule was removed from ATTAQUE, so the attack zone
+can no longer reach the firewall admin. This applies least privilege: the attack
+machine has no rights over the firewall.
+
+**Honest limitations of this version.**
+- The MGMT machine is a second interface on Kali, not a separate host. If Kali
+  is fully compromised, both planes fall. In production the admin plane would be
+  a dedicated machine. The architecture (admin only from MGMT) is correct; only
+  the admin host is shared, for lack of a separate VM.
+- VULN uses the native VLAN rather than a tagged one, because of Metasploitable's
+  age.

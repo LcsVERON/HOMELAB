@@ -1,0 +1,85 @@
+<mxfile host="65bd71144e">
+    <diagram id="00v2qO8crhm0-U8rLLDf" name="Improved homelab">
+        <mxGraphModel dx="995" dy="630" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="HcamaPQcz4Iq1rveDBwn-1" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=16;fontStyle=1;" value="Cybersecurity homelab: architecture after step 10 (VLANs, isolation, management plane)" vertex="1">
+                    <mxGeometry height="30" width="900" x="660" as="geometry"/>
+                </mxCell>
+                <mxCell id="HcamaPQcz4Iq1rveDBwn-2" parent="1" style="text;html=1;strokeColor=#82b366;fillColor=#d5e8d4;align=left;verticalAlign=middle;rounded=1;spacing=6;fontSize=11;" value="Green = added or changed in step 10" vertex="1">
+                    <mxGeometry height="24" width="260" x="660" y="34" as="geometry"/>
+                </mxCell>
+                <mxCell id="HcamaPQcz4Iq1rveDBwn-3" parent="1" style="ellipse;shape=cloud;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontStyle=1;" value="Internet" vertex="1">
+                    <mxGeometry height="80" width="150" x="1180" y="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="HcamaPQcz4Iq1rveDBwn-4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e6e6e6;strokeColor=#666666;" value="WAN - DHCP client (NAT)" vertex="1">
+                    <mxGeometry height="40" width="160" x="1175" y="170" as="geometry"/>
+                </mxCell>
+                <mxCell id="HcamaPQcz4Iq1rveDBwn-5" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=12;" value="pfSense CE - fw.lab.home.arpa&#xa;firewall / router / DHCP / DNS" vertex="1">
+                    <mxGeometry height="70" width="230" x="1140" y="250" as="geometry"/>
+                </mxCell>
+                <mxCell id="HcamaPQcz4Iq1rveDBwn-6" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;dashed=1;" value="em3 = 802.1Q trunk (intnet-trunk)&#xa;native VLAN = VULN, tagged VLAN 99 = MGMT" vertex="1">
+                    <mxGeometry height="50" width="270" x="1120" y="350" as="geometry"/>
+                </mxCell>
+                <mxCell id="HcamaPQcz4Iq1rveDBwn-7" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;verticalAlign=top;fontStyle=1;spacingTop=4;" value="ATTAQUE - 10.10.10.0/24 (em1)" vertex="1">
+                    <mxGeometry height="170" width="260" x="660" y="460" as="geometry"/>
+                </mxCell>
+                <mxCell id="HcamaPQcz4Iq1rveDBwn-8" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#b85450;" value="Kali Linux&#xa;eth0: 10.10.10.10 (attack)&#xa;eth1.99: 10.10.99.10 (management)" vertex="1">
+                    <mxGeometry height="90" width="220" x="680" y="510" as="geometry"/>
+                </mxCell>
+                <mxCell id="HcamaPQcz4Iq1rveDBwn-9" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;verticalAlign=top;fontStyle=1;spacingTop=4;" value="CIBLES - 10.10.20.0/24 (em2)" vertex="1">
+                    <mxGeometry height="170" width="260" x="950" y="460" as="geometry"/>
+                </mxCell>
+                <mxCell id="HcamaPQcz4Iq1rveDBwn-10" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6c8ebf;" value="Debian 13 - srv01&#xa;10.10.20.10&#xa;SSH / nginx / DVWA (Docker)" vertex="1">
+                    <mxGeometry height="90" width="220" x="970" y="510" as="geometry"/>
+                </mxCell>
+                <mxCell id="HcamaPQcz4Iq1rveDBwn-11" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;verticalAlign=top;fontStyle=1;spacingTop=4;" value="VULN - 10.10.30.0/24 (em3 native VLAN)" vertex="1">
+                    <mxGeometry height="170" width="280" x="1240" y="460" as="geometry"/>
+                </mxCell>
+                <mxCell id="HcamaPQcz4Iq1rveDBwn-12" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#82b366;" value="Metasploitable 2&#xa;10.10.30.20&#xa;moved here from CIBLES in step 10" vertex="1">
+                    <mxGeometry height="90" width="230" x="1265" y="510" as="geometry"/>
+                </mxCell>
+                <mxCell id="HcamaPQcz4Iq1rveDBwn-13" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;verticalAlign=top;fontStyle=1;spacingTop=4;" value="MGMT - 10.10.99.0/24 (VLAN 99 tagged)" vertex="1">
+                    <mxGeometry height="170" width="320" x="1550" y="460" as="geometry"/>
+                </mxCell>
+                <mxCell id="HcamaPQcz4Iq1rveDBwn-14" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#82b366;fontSize=11;" value="Management plane&#xa;admin access to pfSense (10.10.99.1) only from here&#xa;carried by Kali eth1.99 (prod: a dedicated admin host)" vertex="1">
+                    <mxGeometry height="100" width="280" x="1570" y="505" as="geometry"/>
+                </mxCell>
+                <mxCell id="HcamaPQcz4Iq1rveDBwn-15" edge="1" parent="1" source="HcamaPQcz4Iq1rveDBwn-3" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=none;strokeColor=#666666;strokeWidth=2;" target="HcamaPQcz4Iq1rveDBwn-4">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="HcamaPQcz4Iq1rveDBwn-16" edge="1" parent="1" source="HcamaPQcz4Iq1rveDBwn-4" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=none;strokeColor=#666666;strokeWidth=2;fontSize=10;" target="HcamaPQcz4Iq1rveDBwn-5" value="em0">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="HcamaPQcz4Iq1rveDBwn-17" edge="1" parent="1" source="HcamaPQcz4Iq1rveDBwn-5" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=none;strokeColor=#82b366;strokeWidth=2;dashed=1;" target="HcamaPQcz4Iq1rveDBwn-6">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="HcamaPQcz4Iq1rveDBwn-18" edge="1" parent="1" source="HcamaPQcz4Iq1rveDBwn-5" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=none;strokeColor=#b85450;strokeWidth=2;fontSize=10;" target="HcamaPQcz4Iq1rveDBwn-7" value="em1&#xa;10.10.10.1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="HcamaPQcz4Iq1rveDBwn-19" edge="1" parent="1" source="HcamaPQcz4Iq1rveDBwn-5" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=none;strokeColor=#6c8ebf;strokeWidth=2;fontSize=10;" target="HcamaPQcz4Iq1rveDBwn-9" value="em2&#xa;10.10.20.1">
+                    <mxGeometry relative="1" x="0.2381" as="geometry">
+                        <mxPoint as="offset"/>
+                        <Array as="points">
+                            <mxPoint x="1255" y="430"/>
+                            <mxPoint x="1080" y="430"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="HcamaPQcz4Iq1rveDBwn-20" edge="1" parent="1" source="HcamaPQcz4Iq1rveDBwn-6" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=none;strokeColor=#82b366;strokeWidth=2;fontSize=10;" target="HcamaPQcz4Iq1rveDBwn-11" value="native&#xa;10.10.30.1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="HcamaPQcz4Iq1rveDBwn-21" edge="1" parent="1" source="HcamaPQcz4Iq1rveDBwn-6" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=none;strokeColor=#82b366;strokeWidth=2;fontSize=10;" target="HcamaPQcz4Iq1rveDBwn-13" value="tagged VLAN 99&#xa;10.10.99.1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="HcamaPQcz4Iq1rveDBwn-22" edge="1" parent="1" source="HcamaPQcz4Iq1rveDBwn-8" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=none;strokeColor=#82b366;strokeWidth=1;dashed=1;fontSize=10;" target="HcamaPQcz4Iq1rveDBwn-14" value="eth1.99 tagged">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="HcamaPQcz4Iq1rveDBwn-23" parent="1" style="text;html=1;strokeColor=#82b366;fillColor=#d5e8d4;align=left;verticalAlign=top;whiteSpace=wrap;rounded=1;spacing=8;fontSize=11;" value="Step 10 improvements:&#xa;1) Metasploitable isolated in VULN, so pfSense now filters Debian - Metasploitable traffic (closed limitation).&#xa;2) Real 802.1Q: VLAN 99 tagged on the em3 trunk; VULN uses the native VLAN (Metasploitable cannot tag).&#xa;3) Management plane: pfSense admin reachable only from MGMT, not from the attack zone (anti-lockout removed on ATTAQUE)." vertex="1">
+                    <mxGeometry height="110" width="900" x="660" y="670" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>

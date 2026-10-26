@@ -60,3 +60,21 @@ Recorded so that interfaces can be assigned correctly at first boot
 - **Metasploitable 2 is never attached to a NAT, NAT Network or Bridged adapter.** Its only adapter is on `intnet-targets`, so it can only be reached through pfSense.
 - Only pfSense has a NAT adapter. No other VM has a direct path to the host or to the home network.
 - Bridged mode is not used anywhere in the lab.
+
+## Changes in step 10: VLAN trunk and new zones
+
+A third internal network was added to carry the two new zones over a single 802.1Q trunk.
+
+| Name | Role | Attached VMs |
+|------|------|--------------|
+| `intnet-trunk` | 802.1Q trunk: native VLAN = VULN, tagged VLAN 99 = MGMT | pfSense (adapter 4), Metasploitable (untagged = VULN), Kali (adapter 2, tagged VLAN 99 = MGMT) |
+
+Updated adapters:
+
+| VM | Change |
+|----|--------|
+| pfSense | Adapter 4 added, internal network `intnet-trunk`, promiscuous "Allow VMs". Appears as em3, used as a trunk (native VULN + tagged VLAN 99) |
+| Metasploitable 2 | Adapter moved from `intnet-targets` to `intnet-trunk` (untagged), IP changed to 10.10.30.20 |
+| Kali | Adapter 2 added, internal network `intnet-trunk`, promiscuous "Allow VMs". Appears as eth1; a tagged VLAN 99 sub-interface (eth1.99) carries management |
+
+Every internal-network adapter keeps promiscuous mode "Allow VMs".

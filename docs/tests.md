@@ -178,3 +178,26 @@ Forbidden flows are blocked: the private network is unreachable from the lab
 (T5), targets cannot pivot to the attacker or administer the firewall (T7, T8),
 the vulnerable target has no Internet (T9), and a reverse shell outside the
 allowed range is dropped (T11). The automated script reports 14 passed, 0 failed.
+
+## Tests added in step 10
+
+| # | From | Command | Expected | Actual | Rule |
+|---|------|---------|----------|--------|------|
+| T12 | Metasploitable | `ping -c2 10.10.30.1` | OK (gateway reachable) | ✅ | VULN R1 |
+| T13 | Metasploitable | `ping -c2 10.10.20.10` | fails (cannot reach Debian) | ✅ | VULN R4 |
+| T14 | Kali | `nc -zv -w3 10.10.30.20 21` | OK (can still attack Metasploitable) | ✅ | ATTAQUE -> VULN |
+| T15 | Kali (attack) | open `https://10.10.10.1` | blocked (no admin from attack zone) | ✅ | ATTAQUE (anti-lockout removed) |
+| T16 | Kali (mgmt) | open `https://10.10.99.1` | OK (admin from MGMT) | ✅ | MGMT R1 |
+
+T13 is the proof that the documented limitation is closed: Metasploitable can no
+longer reach Debian, and the drop appears in the firewall log on VULN.
+
+**802.1Q proof.** On Kali, capturing the trunk interface shows the VLAN 99 tag:
+
+```
+$ sudo tcpdump -i eth1 -e -n vlan
+... 802.1Q, ... vlan 99, p 0, ethertype IPv4, 10.10.99.10 > 10.10.99.1: ICMP echo request
+```
+
+Screenshots: `screenshots/step10/msf-to-debian-blocked.png` (T13), `screenshots/step10/tcpdump-vlan99.png`
+(VLAN 99 tag), `screenshots/step10/rules-vuln.png`, `screenshots/step10/rules-mgmt.png`, `screenshots/step10/rules-attaque.png`.

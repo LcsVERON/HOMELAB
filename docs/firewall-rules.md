@@ -109,3 +109,40 @@ blocked by default. The following settings are verified rather than created.
 - **Firewall > NAT > Outbound: Automatic mode.** The lab's private 10.10.x.x
   addresses cannot travel on the Internet, so pfSense rewrites them to its WAN
   address on the way out. Automatic mode generates the needed rules per subnet.
+
+## Rules added in step 10 (VULN and MGMT)
+
+### VULN interface rules
+
+Metasploitable now lives here. Same idea as CIBLES for a target, but with no
+access to Debian.
+
+| # | Action | Proto | Source | Destination | Port | Log | Justification |
+|---|--------|-------|--------|-------------|------|-----|---------------|
+| R1 | Pass | ICMP echo request | VULN subnets | VULN address | - | - | Ping the gateway, for troubleshooting |
+| R2 | Pass | TCP | VULN subnets | `KALI` | `PORTS_REVERSE` | yes | Reverse shells back to Kali, same reasoning as on CIBLES |
+| R3 | Block | any (IPv4+IPv6) | VULN subnets | This Firewall | any | yes | A compromised target must not reach the firewall |
+| R4 | Block | any (IPv4+IPv6) | VULN subnets | any | any | yes | Default deny. No rule allows VULN to reach CIBLES, so this blocks Metasploitable from reaching Debian |
+
+It is R4 that closes the documented limitation: nothing permits VULN to reach the
+Debian subnet, so the traffic is dropped and logged.
+
+### MGMT interface rules
+
+| # | Action | Proto | Source | Destination | Port | Log | Justification |
+|---|--------|-------|--------|-------------|------|-----|---------------|
+| R1 | Pass | TCP | MGMT subnets | This Firewall | `PORTS_WEB` (80, 443) | - | Administration of pfSense from the management plane only |
+| R2 | Block | any (IPv4+IPv6) | MGMT subnets | any | any | yes | Logged default deny; the management plane may do nothing else |
+
+### Change to ATTAQUE
+
+- Added a rule **ATTAQUE subnets -> VULN subnets** (Pass, any, logged), placed
+  just after the existing "attacker to targets" rule, so Kali can still attack
+  Metasploitable after it moved to VULN.
+- Removed the **anti-lockout rule** (System > Advanced > Admin Access). The
+  attack zone can no longer reach the firewall admin; administration is only
+  possible from MGMT.
+
+### Alias change
+
+- `MSF2` updated from 10.10.20.20 to 10.10.30.20.

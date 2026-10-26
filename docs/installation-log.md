@@ -205,6 +205,48 @@ Rules for this file:
 
 **Screenshots:** see the four files listed above.
 
-**Next:** optional 802.1Q VLAN improvements (step 10), then final documentation
-and publishing (step 11).
+**Next:** optional 802.1Q VLAN improvements (step 10).
+
+## Step 10: 802.1Q VLANs, target isolation and management plane
+
+**Done:**
+- Added a VLAN trunk: new VirtualBox internal network `intnet-trunk`, attached to
+  a 4th pfSense adapter (em3)
+- Created VLAN 99 (MGMT) on em3 in pfSense; assigned VULN to the native
+  (untagged) interface of em3, and MGMT to the tagged VLAN 99
+- New zones: VULN 10.10.30.0/24 (gateway 10.10.30.1), MGMT 10.10.99.0/24
+  (gateway 10.10.99.1)
+- Moved Metasploitable to VULN (10.10.30.20), so Debian and Metasploitable are
+  now in different subnets and their traffic is filtered by pfSense
+- Gave Kali a management interface: 2nd adapter on intnet-trunk, tagged VLAN 99,
+  10.10.99.10, created as a persistent NetworkManager VLAN connection
+- Firewall: added VULN rules (ping gateway, reverse shell to Kali, block to
+  firewall, default deny), an ATTAQUE rule "Kali to VULN", a MGMT rule (admin
+  access to the firewall) and its logged default deny. Updated alias MSF2 to
+  10.10.30.20
+- Management plane: disabled the anti-lockout rule on ATTAQUE (System > Advanced > Admin Access). pfSense is now administered only from MGMT (10.10.99.1); the
+  attack zone can no longer reach the firewall admin
+
+**Problems and solutions:**
+- Metasploitable is too old to tag 802.1Q frames (no vconfig, no modern ip vlan)
+  → put VULN on the native VLAN of the trunk, so Metasploitable uses a plain
+  untagged static config; only MGMT is tagged (VLAN 99). The setup is still a
+  real trunk (native + tagged on the same link)
+- The bare em3 interface was first assigned as an extra zone by mistake, which
+  shifted the OPT numbering → deleted that assignment, VULN then used em3 native
+- Before removing the anti-lockout rule, verified the MGMT path worked (logged
+  in via https://10.10.99.1). The pfSense VM console stays available as a last
+  resort against lockout
+
+**Screenshots:** 
+- `screenshots/step10/assignments.png`
+- `screenshots/step10/vlans.png`
+- `screenshots/step10/rules-vuln.png`
+- `screenshots/step10/rules-mgmt.png`
+- `screenshots/step10/rules-attaque.png`
+- `screenshots/step10/kali-vlan99.png`
+- `screenshots/step10/tcpdump-vlan99.png`
+- `screenshots/step10/msf-to-debian-blocked.png`
+
+**Next:** final documentation and publishing (step 11).
 

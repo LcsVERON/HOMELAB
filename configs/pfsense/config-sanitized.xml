@@ -1000,9 +1000,10 @@
 		<hosts>
 			<host>msf2</host>
 			<domain>lab.home.arpa</domain>
-			<ip>10.10.20.20</ip>
+			<ip>10.10.30.20</ip>
 			<descr></descr>
-			<aliases></aliases>
+			<aliases>
+			</aliases>
 		</hosts>
 		<hosts>
 			<host>srv01</host>
@@ -1024,8 +1025,8 @@
 	</vlans>
 	<qinqs></qinqs>
 	<revision>
-		<time>1793015839</time>
-		<description><![CDATA[admin@10.10.99.10 (Local Database): VLAN interface deleted]]></description>
+		<time>1793027729</time>
+		<description><![CDATA[admin@10.10.99.10 (Local Database): Host override configured for DNS Resolver.]]></description>
 		<username><![CDATA[admin@10.10.99.10 (Local Database)]]></username>
 	</revision>
 	<gateways>
